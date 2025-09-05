@@ -195,7 +195,7 @@ const login = async (req, res, next) => {
       success: true,
       message: "Login successful",
       token: token, 
-      userData: userResponse 
+      data: {user:userResponse,token:token }
     });
   } catch (error) {
     next(new errorResp(error, "Login failed", 500));
