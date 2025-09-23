@@ -1,7 +1,7 @@
 {
-  "name": "nodeJs",
+  "name": "auction-system-backend",
   "version": "1.0.0",
-  "description": "Backend of taiba kids school system",
+  "description": "Backend of online auction system",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

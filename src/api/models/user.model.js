@@ -49,11 +49,11 @@ const userModelSchema = new mongoose.Schema({
     default: 'prefer_not_to_say'
   },
   
-  // E-commerce Specific Fields
+  // Auction System Specific Fields
   role: {
     type: String,
-    enum: ['customer', 'admin', 'moderator', 'vendor', 'guest'],
-    default: 'customer',
+    enum: ['bidder', 'seller', 'admin', 'moderator', 'guest'],
+    default: 'bidder',
     required: [true, "Role is required"]
   },
   
@@ -75,8 +75,20 @@ const userModelSchema = new mongoose.Schema({
     default: false
   },
   
-  // Order History & Statistics
-  totalOrders: {
+  // Auction Statistics
+  totalAuctions: {
+    type: Number,
+    default: 0
+  },
+  totalBids: {
+    type: Number,
+    default: 0
+  },
+  totalWon: {
+    type: Number,
+    default: 0
+  },
+  totalSold: {
     type: Number,
     default: 0
   },
@@ -84,8 +96,51 @@ const userModelSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  lastOrderDate: {
+  totalEarned: {
+    type: Number,
+    default: 0
+  },
+  lastBidDate: {
     type: Date
+  },
+  lastAuctionDate: {
+    type: Date
+  },
+  
+  // Auction Reputation & Rating
+  sellerRating: {
+    average: {
+      type: Number,
+      default: 0,
+      min: [0, "Rating cannot be negative"],
+      max: [5, "Rating cannot exceed 5"]
+    },
+    count: {
+      type: Number,
+      default: 0
+    }
+  },
+  bidderRating: {
+    average: {
+      type: Number,
+      default: 0,
+      min: [0, "Rating cannot be negative"],
+      max: [5, "Rating cannot exceed 5"]
+    },
+    count: {
+      type: Number,
+      default: 0
+    }
+  },
+  
+  // Account Verification
+  isIdentityVerified: {
+    type: Boolean,
+    default: false
+  },
+  isPaymentVerified: {
+    type: Boolean,
+    default: false
   },
   
   // Social & Marketing
@@ -125,14 +180,14 @@ const userModelSchema = new mongoose.Schema({
     type: String,
     default: null
   },
-  
+
   // Additional Notes
   notes: {
     type: String,
     maxlength: [500, "Notes cannot exceed 500 characters"]
   }
 }, {
-  timestamps: true, // Adds createdAt and updatedAt
+  timestamps: true,
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
 });

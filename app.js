@@ -27,9 +27,9 @@ app.listen(port, () => {
   console.log(`url: http://localhost:${port}`);
 });
 
-// Accounts Routers
+// Auction System Routers
 app.get("/", (req, res) => {
-  res.send("Welcome to e-commerce system");
+  res.send("Welcome to Online Auction System");
 });
 
 // handle error 
